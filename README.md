@@ -14,7 +14,7 @@ sudo reboot
 ### 下载casper
 https://github.com/haoqi6805/casper.git
 
-### 安装Vim & ufw
+### 安装vim & ufw
 ```bash
 sudo apt update  
 sudo apt install ufw
@@ -41,6 +41,7 @@ sudo ufw default deny
 ```bash
 sudo systemctl mask bluetooth.service  
 sudo systemctl mask NetworkManager.service
+sudo reboot
 ```
 
 ### 开始
