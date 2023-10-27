@@ -1,4 +1,5 @@
 # casper
+采用AES256/EAX加密算法加密和解密文件
 
 ### 系统
 Ubuntu 22.04.1 LTS
@@ -21,6 +22,13 @@ python -m pip install --upgrade pip
 python -m pip install pycryptodomex  
 python -m pip install mnemonic  
 ```
+
+### 关闭网络及蓝牙服务(推荐)
+```bash
+sudo systemctl mask bluetooth.service  
+sudo systemctl mask NetworkManager.service
+```
+
 ### 开始
 ```bash
 ./run.sh
