@@ -7,7 +7,7 @@ Ubuntu 22.04.1 LTS
 ### 下载casper
 https://github.com/haoqi6805/casper.git
 
-### 安装Vim & ufw
+### 安装vim & ufw
 ```bash
 sudo apt update  
 sudo apt install ufw
