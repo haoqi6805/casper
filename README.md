@@ -21,8 +21,9 @@ cd ~
 git clone https://github.com/haoqi6805/casper.git
 ```
 
-### 搭建虚拟环境
+### Python虚拟环境搭建
 ```python
+cd ~/casper
 python3 -m venv .venv  
 source .venv/bin/activate  
 python -m pip install --upgrade pip  
@@ -32,7 +33,7 @@ python -m pip install mnemonic
 
 ### 配置vim
 ```bash
-cp vim_config ~/.vimrc
+cp ~/casper/vim_config ~/.vimrc
 ```
 
 ### 防火墙设置（推荐）
