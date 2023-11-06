@@ -5,13 +5,13 @@
 Raspberry Pi 4 Model B
 
 ### 系统
-Raspbian GNU/Linux 11 (bullseye)
+Ubuntu 22.04.3 for Rasberry Pi
 
 ### 安装软件
 ```bash
 sudo apt update
 sudo apt install -y build-essential gcc make perl dkms
-sudo apt install -y ufw vim git fcitx fcitx-googlepinyin
+sudo apt install -y ufw vim git fcitx fcitx-googlepinyin python3.10-venv
 sudo reboot
 ```
 
