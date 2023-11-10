@@ -1,5 +1,5 @@
 " VIM 配置文件
-" cp vim_config ～/.vimrc
+" 用法：cp vim_config ～/.vimrc
 
 " UFT8编码
 set encoding=utf8
