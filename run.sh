@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd cspr/
-../.venv/bin/python ../aes_eax.py
+../.venv/bin/python ../file_cryptor.py
