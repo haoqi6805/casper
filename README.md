@@ -19,9 +19,11 @@ sudo reboot
 ```bash
 cd ~
 git clone https://github.com/haoqi6805/casper.git
+cd ~/casper
+mkdir cspr
 ```
 
-### Python虚拟环境搭建
+### Python虚拟环境
 ```python
 cd ~/casper
 python3 -m venv .venv  
@@ -47,6 +49,10 @@ sudo ufw default deny
 sudo rfkill block all
 sudo systemctl mask bluetooth.service  
 sudo systemctl mask NetworkManager.service
+```
+
+### 重启
+```bash
 sudo reboot
 ```
 
