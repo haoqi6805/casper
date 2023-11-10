@@ -1,14 +1,24 @@
 " VIM 配置文件
+" cp vim_config ～/.vimrc
 
-set encoding=utf8    " UFT8编码
-set nu               " 显示行号
-set clipboard=       " 禁用剪贴板
-set showmatch        " 括号匹配
-syntax enable        " 语法高亮
+" UFT8编码
+set encoding=utf8
+
+" 显示行号
+set nu
+
+" 禁用剪贴板
+set clipboard=
+
+" 括号匹配
+set showmatch
+
+" 语法高亮
+syntax enable
 
 " 1 Tab == 4 spaces
 set expandtab
-set smarttab 
+set smarttab
 set tabstop=4
 set shiftwidth=4
 
