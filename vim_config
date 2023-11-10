@@ -3,6 +3,7 @@
 set encoding=utf8    " UFT8编码
 set nu               " 显示行号
 set clipboard=       " 禁用剪贴板
+set showmatch        " 括号匹配
 syntax enable        " 语法高亮
 
 " 1 Tab == 4 spaces
