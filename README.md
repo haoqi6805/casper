@@ -1,7 +1,8 @@
 # CASPER AES256 文件加密模块
 采用AES256/EAX算法，对任意格式文件进行加密
 
-### 硬件
+
+#### 硬件
 Raspberry Pi 4 Model B
 
 ### 系统
@@ -58,5 +59,5 @@ sudo reboot
 
 ### 开始
 ```bash
-./run.sh
+~/casper/run.sh
 ```
