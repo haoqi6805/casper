@@ -12,7 +12,6 @@ Ubuntu 22.04.3 for Rasberry Pi
 sudo apt update
 sudo apt install -y build-essential gcc make perl dkms
 sudo apt install -y ufw vim git fcitx fcitx-googlepinyin python3.10-venv
-sudo reboot
 ```
 
 ### 下载casper
