@@ -156,6 +156,7 @@ if __name__ == "__main__":
         
         # Show current key
         elif option in ['s', 'S', 'show', 'SHOW']:
+            key = input('Mnemonic: ') or key
             print('Current key: {0}'.format(key))
             print('Hexadecimal: ' + key.hex())
             print('Base64: ' + b64encode(key).decode('utf-8'))
