@@ -148,34 +148,31 @@ if __name__ == "__main__":
         else:
             print('[warning] Using unknow key')
 
-        option = input('[menu] e.Encrypt file  d.Decrypt file  m.Mnemonic converter  q.Quit >> ')
+        option = input('[menu] e.Encrypt file  d.Decrypt file  s.Show key  q.Quit >> ')
 
         system('clear')
         print(brief_introduction)
         print('**************************')
         
-        # Encrypt file
         if option in ['e', 'E', 'encrypt','ENCRYPT']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
                 FileCryptor.encrypt(key, file_name)
-                print('[Message] Encryption successful' + '\n')
+                print('[message] Encryption successful' + '\n')
             except Exception as e:
-                print('[Warning] Encryption failed' + '\n')
+                print('[warning] Encryption failed' + '\n')
         
-        # Decrypt file
         elif option in ['d', 'D', 'decrypt', 'DECRYPT']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
                 FileCryptor.decrypt(key, file_name)
-                print('[Message] Decryption successful' + '\n')
+                print('[message] Decryption successful' + '\n')
             except Exception as e:
-                print('[Warning] Decryption failed' + '\n')
+                print('[warning] Decryption failed' + '\n')
         
-        # Mnemonic converter
-        elif option in ['m', 'M', 'mnemonic', 'MNEMONIC']:
+        elif option in ['s', 'S', 'show', 'SHOW']:
             words = input('Mnemonic: ') or mnemo.to_mnemonic(key)
             try:
             	entropy = mnemo.to_entropy(words)
@@ -192,11 +189,10 @@ if __name__ == "__main__":
             else:
                 print('\n')
 
-        # Quit
         elif option in ['q', 'Q', 'quit', 'QUIT']:
             system('clear')
             sys.exit()
 
         # Invalid option
         else:
-            print('[Message] Invalid option' + '\n')
+            print('[message] Invalid option' + '\n')
