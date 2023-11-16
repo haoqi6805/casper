@@ -1,4 +1,4 @@
-# Casper File Cryptor
+# CASPER File Cryptor
 ### 硬件
 Raspberry Pi 4 Model B
 
