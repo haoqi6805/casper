@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     mnemo = Mnemonic('english')
     while True:
-        option = input('[menu] 1.Input key  2.Create key  3.Quit >> ')
+        option = input('[menu] i.Input key  n.New key  q.Quit >> ')
 
         system('clear')
         print(brief_introduction)
@@ -80,7 +80,6 @@ if __name__ == "__main__":
             if word == '':
                 if (input('[message] Use default key? [Y/n] >> ') or 'n') == 'Y':
                     key = bytes.fromhex(KEY_DEFAULT)
-                    key_tip = '[Message] Using default key'
                     break
                 else:
                     continue
@@ -88,36 +87,35 @@ if __name__ == "__main__":
             try:
                 key = (bytes(mnemo.to_entropy(word)) + bytes.fromhex(KEY_DEFAULT))[0:32]
             except Exception as e:
-                print('[warning] Key format error')
+                print('[warning] Mnemonic format error')
                 continue
             
+            ciphertext = '1P2lxncRWXy0ysL4X0kdKq2ZLJszqAAZdvs92dE6QtC1n6dxm2sogdtsRuqIDFeBnJzr0mH8t1qzRQ3NxH1SdhBg37TEwE0M/YCY78M072Y='
             try:
-                ciphertext = 'bQbAK/rA6MZj4cRxRj9aBC7MImDrUfcgGBb/uBx45wUqN7XaSA/OFVfIl3V1CTmgnrTMl/8b7asET5eihaF+MsairncjcmsbkA'
                 plaintext = DataCryptor.decrypt(key, b64decode(ciphertext.encode('utf-8')))
-                key_tip = '[Message] ' + plaintext.decode('utf-8')
                 break
             except Exception as e:
                 if (input('[message] Use this unknow key? [Y/n] >> ') or 'n') == 'Y':
-                    key_tip = '[Warning] Using unknow key'
+                    plaintext = b''
                     break
                 else:
                     continue
 
-        # Creat key
-        elif option in ['c', 'C', 'creat', 'CREAT']: 
-            key_len = input('Key length (default 32 bytes): ') or '32'
+        # New key
+        elif option in ['n', 'N', 'new', 'NEW']: 
+            key_len = input('Length (default 32 bytes): ') or '32'
     
             new_key = secrets.token_bytes(int(key_len))
 
-            print('New key: {0}'.format(new_key))
-            print('Hexadecimal: ' + new_key.hex())
+            print('Key: {0}'.format(new_key))
+            print('Hex: ' + new_key.hex())
             print('Base64: ' + b64encode(new_key).decode('utf-8'))
-            if int(key_len) not in [16, 20, 24, 32]:
+            print('Ciphertext: ' + b64encode(DataCryptor.encrypt((new_key + bytes.fromhex(KEY_DEFAULT))[0:32], new_key)).decode('utf-8'))
+            try:
+                print('Mnemonic: ' + mnemo.to_mnemonic(new_key) + '\n')
+            except Exception as e:
                 print('Mnemonic: None' + '\n')
-            else:
-                mnemonic = mnemo.to_mnemonic(new_key)
-                print('Mnemonic: ' + mnemonic + '\n')
-
+            
         # Quit
         elif option in ['q', 'Q', 'quit', 'QUIT']:
             system('clear')
@@ -127,8 +125,18 @@ if __name__ == "__main__":
         else:
             print('[Message] Invalid option' + '\n')
 
-    while True:
-        option = input('[menu] 1.Encrypt file  2.Decrypt file  3.Show current key  4.Quit >> ')
+    system('clear')
+    print(brief_introduction)
+    print('*********************************')
+    while True:    
+        if key == bytes.fromhex(KEY_DEFAULT):
+            print('[Tip] Using default key')
+        elif key == plaintext:
+            pass
+        else:
+            print('[Tip] Using unknow key')
+
+        option = input('[menu] e.Encrypt file  d.Decrypt file  m.Mnemonic converter  q.Quit >> ')
 
         system('clear')
         print(brief_introduction)
@@ -154,14 +162,23 @@ if __name__ == "__main__":
             except Exception as e:
                 print('[Warning] Decryption failed' + '\n')
         
-        # Show current key
-        elif option in ['s', 'S', 'show', 'SHOW']:
-            key = input('Mnemonic: ') or key
-            print('Current key: {0}'.format(key))
-            print('Hexadecimal: ' + key.hex())
-            print('Base64: ' + b64encode(key).decode('utf-8'))
-            print('Mnemonic: ' + mnemo.to_mnemonic(key) + '\n')
-            print(key_tip)
+        # Mnemonic converter
+        elif option in ['m', 'M', 'mnemonic', 'MNEMONIC']:
+            words = input('Mnemonic: ') or mnemo.to_mnemonic(key)
+            try:
+            	entropy = mnemo.to_entropy(words)
+            except Exception as e:
+            	print('[warning] Mnemonic error' + '\n')
+            	continue
+            	
+            print('Key: {0}'.format(bytes(entropy)))
+            print('Hex: ' + entropy.hex())
+            print('Base64: ' + b64encode(entropy).decode('utf-8'))
+            print('Ciphertext: ' + b64encode(DataCryptor.encrypt(entropy, entropy)).decode('utf-8'))
+            if entropy == key:
+                print('Mnemonic: ' + mnemo.to_mnemonic(entropy) + '\n')
+            else:
+                print('\n')
 
         # Quit
         elif option in ['q', 'Q', 'quit', 'QUIT']:
