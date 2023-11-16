@@ -1,6 +1,4 @@
-# CASPER AES256 文件加密模块
-功能：采用AES256/EAX算法，对任意格式文件进行加密
-
+# Casper File Cryptor
 ### 硬件
 Raspberry Pi 4 Model B
 
