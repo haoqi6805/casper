@@ -114,8 +114,9 @@ if __name__ == "__main__":
                     continue
 
         # New key
-        elif option in ['n', 'N', 'new', 'NEW']: 
-            key_len = input('Length (default 32 bytes): ') or '32'
+        elif option in ['n', 'N', 'new', 'NEW']:
+            print('[message] The default length is 32 bytes')
+            key_len = input('Length: ') or '32'
     
             new_key = secrets.token_bytes(int(key_len))
 
@@ -148,7 +149,7 @@ if __name__ == "__main__":
         else:
             print('[warning] Using unknow key')
 
-        option = input('[menu] e.Encrypt file  d.Decrypt file  s.Show key  q.Quit >> ')
+        option = input('[menu] e.Encrypt file  d.Decrypt file  k.display Key  q.Quit >> ')
 
         system('clear')
         print(brief_introduction)
@@ -172,7 +173,8 @@ if __name__ == "__main__":
             except Exception as e:
                 print('[warning] Decryption failed' + '\n')
         
-        elif option in ['s', 'S', 'show', 'SHOW']:
+        elif option in ['k', 'K', 'key', 'KEY']:
+            print('[tip] Press Enter to display the current key' + '\n')
             words = input('Mnemonic: ') or mnemo.to_mnemonic(key)
             try:
             	entropy = mnemo.to_entropy(words)
