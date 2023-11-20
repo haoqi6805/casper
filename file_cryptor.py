@@ -90,7 +90,7 @@ if __name__ == "__main__":
             try:
                 key = b64decode(((key_input.strip().rstrip('=') + KEY_PADDING)[0:43] + '=').encode('utf-8'))
             except Exception as e:
-                print('[warning] Key format is wrong')
+                print('[warning] Key format is wrong' + '\n')
                 continue
 
             try:
@@ -101,7 +101,7 @@ if __name__ == "__main__":
             if key == key_plaintext:
                 break
             else:
-                print('[warning] Incorrect key')
+                print('[warning] Incorrect key' + '\n')
             
         elif option in ['n', 'N', 'new', 'NEW']:
             key_len = input('Length (default 32 bytes): ') or '32'
