@@ -115,7 +115,12 @@ if __name__ == "__main__":
             print('Key: {0}'.format(new_key))
             print('Hex: ' + new_key.hex())
             print('Base64: ' + b64encode(new_key).decode('utf-8'))
-            print('Ciphertext: ' + b64encode(DataCryptor.encrypt(new_key, new_key)).decode('utf-8'))
+            
+            try:
+                print('Ciphertext: ' + b64encode(DataCryptor.encrypt(new_key, new_key)).decode('utf-8'))
+            except Exception as e:
+                pass
+                
             try:
                 print('Mnemonic: ' + mnemo.to_mnemonic(new_key) + '\n')
             except Exception as e:
@@ -158,6 +163,7 @@ if __name__ == "__main__":
             print('Hex: ' + key.hex())
             print('Base64: ' + b64encode(key).decode('utf-8'))
             print('Ciphertext: ' + b64encode(DataCryptor.encrypt(key, key)).decode('utf-8'))
+            
             try:
                 print('Mnemonic: ' + mnemo.to_mnemonic(key) + '\n')
             except Exception as e:
