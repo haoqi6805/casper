@@ -85,7 +85,7 @@ if __name__ == "__main__":
         print('**************************')
         
         if option in ['i', 'I', 'input', 'INPUT']:
-            key_input = getpass('Key: ')
+            key_input = getpass('Enter key: ')
 
             try:
                 key = b64decode(((key_input.strip().rstrip('=') + KEY_PADDING)[0:43] + '=').encode('utf-8'))
