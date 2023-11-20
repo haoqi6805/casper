@@ -27,7 +27,6 @@ from mnemonic import Mnemonic
 # key
 # ylw3Sur3burHSxk4W5GXAXw4VqWQH5Yo2JIznuD6Q50
 
-KEY_PADDING = 'LRctAHG2ruW2qrPowWJwzn6Rww0V2Xdu29sld1HiEqY'
 KEY_CIPHERTEXT = 'U5nVyG+EUZdUJPYCHIuBy7c9I0Toq0gNSqA9zVY0Z/tY3N1PturJ1do5EzyzENMPaZ/Q0tFORsL5RWem/b/oVYH6KkGrWW4mKriMlwltGek='
 
 class DataCryptor():
@@ -88,20 +87,13 @@ if __name__ == "__main__":
             key_input = getpass('Enter key: ')
 
             try:
-                key = b64decode(((key_input.strip().rstrip('=') + KEY_PADDING)[0:43] + '=').encode('utf-8'))
+                key = b64decode(((key_input.strip().rstrip('='))[0:43] + '=').encode('utf-8'))
+                if key == DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8'))):
+                    break
             except Exception as e:
-                print('[warning] Key format is wrong' + '\n')
-                continue
+                pass
 
-            try:
-                key_plaintext = DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))
-            except Exception as e:
-                key_plaintext = ''
-
-            if key == key_plaintext:
-                break
-            else:
-                print('[warning] Incorrect key' + '\n')
+            print('[warning] Incorrect key' + '\n')
             
         elif option in ['n', 'N', 'new', 'NEW']:
             key_len = input('Length (default 32 bytes): ') or '32'
@@ -115,11 +107,8 @@ if __name__ == "__main__":
             print('Key: {0}'.format(new_key))
             print('Hex: ' + new_key.hex())
             print('Base64: ' + b64encode(new_key).decode('utf-8'))
-            
-            try:
+            if len(new_key) == 32:
                 print('Ciphertext: ' + b64encode(DataCryptor.encrypt(new_key, new_key)).decode('utf-8'))
-            except Exception as e:
-                pass
                 
             try:
                 print('Mnemonic: ' + mnemo.to_mnemonic(new_key) + '\n')
