@@ -74,7 +74,7 @@ if __name__ == "__main__":
         brief_introduction = 'Casper File Cryptor 3.0.2'
         system('clear')
         print(brief_introduction)
-        print('————————————————————————————')
+        print('*************************')
 
     clear_screen()
     mnemo = Mnemonic('english')
@@ -106,7 +106,7 @@ if __name__ == "__main__":
                     break
                 else:
                     if DEBUG == True:
-                        print('Key: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
+                        print('Key decrypted: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
                     print('[warning] Incorrect key' + '\n')
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
