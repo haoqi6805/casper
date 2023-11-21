@@ -106,9 +106,9 @@ if __name__ == "__main__":
                 if key == DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8'))):
                     break
                 else:
-                    print('[warning] Unknow error')
                     if DEBUG == True:
-                        print('Decrypted: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
+                        print('Key: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
+                    print('[warning] Unknow error' + '\n')
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
                 continue
@@ -137,6 +137,9 @@ if __name__ == "__main__":
         else:
             print('[message] Invalid option' + '\n')
 
+    system('clear')
+    print(brief_introduction)
+    print('*********************************')
     while True:
         if DEBUG == True: print('[message] Debug mode')
         option = input('[menu] e.Encrypt file  d.Decrypt file  q.Quit >> ')
