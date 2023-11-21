@@ -86,7 +86,7 @@ if __name__ == "__main__":
         print('**************************')
         
         if option in ['i', 'I', 'input', 'INPUT']:
-            key_input = getpass('Key: ')
+            key_input = getpass('Enter key: ')
             if DEBUG == True:
                 print('Input: ' + key_input)
         
@@ -103,14 +103,15 @@ if __name__ == "__main__":
                 continue
 
             try:
-                key_plaintext = DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))
-                if DEBUG == True:
-                    print('Plaintext: {0}'.format(key_plaintext) + '\n')
+                if key == DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8'))):
+                    break
+                else:
+                    print('[warning] Unknow error')
+                    if DEBUG == True:
+                        print('Key: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
                 continue
-
-            if key == key_plaintext: break
             
         elif option in ['n', 'N', 'new', 'NEW']: 
             key_len = input('Length (default 32 bytes): ') or '32'
