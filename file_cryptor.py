@@ -71,10 +71,9 @@ class FileCryptor():
 
 if __name__ == "__main__":
     def clear_screen():
-        brief_introduction = 'Casper File Cryptor v3.0.2'
+        brief_introduction = 'Casper File Cryptor 3.0.2'
         system('clear')
         print(brief_introduction)
-        print('--------------------------')
 
     clear_screen()
     mnemo = Mnemonic('english')
@@ -85,6 +84,7 @@ if __name__ == "__main__":
 
         clear_screen()
         if option in ['i', 'I', 'input', 'INPUT']:
+            print('[Input key]')
             key_input = getpass('Enter key: ')
             if DEBUG == True:
                 print('Input: ' + key_input)
@@ -111,7 +111,8 @@ if __name__ == "__main__":
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
             
-        elif option in ['n', 'N', 'new', 'NEW']: 
+        elif option in ['n', 'N', 'new', 'NEW']:
+            print('[New key]')
             key_len = input('Length (default 32 bytes): ') or '32'
     
             try:
@@ -142,6 +143,7 @@ if __name__ == "__main__":
 
         clear_screen()
         if option in ['e', 'E', 'encrypt','ENCRYPT']:
+            print('[Encrypt file]')
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
@@ -151,6 +153,7 @@ if __name__ == "__main__":
                 print('[warning] Failed' + '\n')
         
         elif option in ['d', 'D', 'decrypt', 'DECRYPT']:
+            print('[Decrypt file]')
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
