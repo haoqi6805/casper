@@ -108,7 +108,7 @@ if __name__ == "__main__":
                 else:
                     print('[warning] Unknow error')
                     if DEBUG == True:
-                        print('Key: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
+                        print('Decrypted: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
                 continue
@@ -119,7 +119,7 @@ if __name__ == "__main__":
             try:
                 new_key = secrets.token_bytes(int(key_len))
             except Exception as e:
-                print('[warning] Key generation failed' + '\n')
+                print('[warning] Generation failed' + '\n')
                 continue
 
             print('Key: {0}'.format(new_key))
