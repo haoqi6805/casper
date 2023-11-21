@@ -70,21 +70,20 @@ class FileCryptor():
 
 
 if __name__ == "__main__":
-    system('clear')
-    brief_introduction = 'Casper File Cryptor v3.0.2'
-    print(brief_introduction)
-    print('**************************')
+    def clear_screen():
+        brief_introduction = 'Casper File Cryptor v3.0.2'
+        system('clear')
+        print(brief_introduction)
+        print('--------------------------')
 
+    clear_screen()
     mnemo = Mnemonic('english')
     while True:
         if DEBUG == True:
             print('[message] Debug mode')
         option = input('[menu] i.Input key  n.New key  q.Quit >> ')
 
-        system('clear')
-        print(brief_introduction)
-        print('**************************')
-        
+        clear_screen()
         if option in ['i', 'I', 'input', 'INPUT']:
             key_input = getpass('Enter key: ')
             if DEBUG == True:
@@ -108,10 +107,9 @@ if __name__ == "__main__":
                 else:
                     if DEBUG == True:
                         print('Key: {0}'.format(DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))))
-                    print('[warning] Unknow error' + '\n')
+                    print('[warning] Incorrect key' + '\n')
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
-                continue
             
         elif option in ['n', 'N', 'new', 'NEW']: 
             key_len = input('Length (default 32 bytes): ') or '32'
@@ -119,7 +117,7 @@ if __name__ == "__main__":
             try:
                 new_key = secrets.token_bytes(int(key_len))
             except Exception as e:
-                print('[warning] Generation failed' + '\n')
+                print('[warning] Incorrect length' + '\n')
                 continue
 
             print('Key: {0}'.format(new_key))
@@ -137,34 +135,29 @@ if __name__ == "__main__":
         else:
             print('[message] Invalid option' + '\n')
 
-    system('clear')
-    print(brief_introduction)
-    print('*********************************')
+    clear_screen()
     while True:
         if DEBUG == True: print('[message] Debug mode')
         option = input('[menu] e.Encrypt file  d.Decrypt file  q.Quit >> ')
 
-        system('clear')
-        print(brief_introduction)
-        print('*********************************')
-        
+        clear_screen()
         if option in ['e', 'E', 'encrypt','ENCRYPT']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
                 FileCryptor.encrypt(key, file_name)
-                print('[message] Encryption successful' + '\n')
+                print('[message] Done' + '\n')
             except Exception as e:
-                print('[warning] Encryption failed' + '\n')
+                print('[warning] Failed' + '\n')
         
         elif option in ['d', 'D', 'decrypt', 'DECRYPT']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
                 FileCryptor.decrypt(key, file_name)
-                print('[message] Decryption successful' + '\n')
+                print('[message] Done' + '\n')
             except Exception as e:
-                print('[warning] Decryption failed' + '\n')
+                print('[warning] Failed' + '\n')
 
         elif option in ['q', 'Q', 'quit', 'QUIT']:
             system('clear')
