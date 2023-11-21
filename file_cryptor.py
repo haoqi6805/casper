@@ -29,7 +29,6 @@ from mnemonic import Mnemonic
 
 DEBUG = False
 KEY_CIPHERTEXT = 'U5nVyG+EUZdUJPYCHIuBy7c9I0Toq0gNSqA9zVY0Z/tY3N1PturJ1do5EzyzENMPaZ/Q0tFORsL5RWem/b/oVYH6KkGrWW4mKriMlwltGek='
-KEY_PADDING = 'LRctAHG2ruW2qrPowWJwzn6Rww0V2Xdu29sld1HiEqY'
 
 class DataCryptor():
     @staticmethod
@@ -78,8 +77,9 @@ if __name__ == "__main__":
 
     mnemo = Mnemonic('english')
     while True:
-        if DEBUG == True: print('[message] Debug mode')
-        option = input('[menu] i.Input key  n.New key  3.Quit >> ')
+        if DEBUG == True:
+            print('[message] Debug mode')
+        option = input('[menu] i.Input key  n.New key  q.Quit >> ')
 
         system('clear')
         print(brief_introduction)
@@ -87,36 +87,30 @@ if __name__ == "__main__":
         
         if option in ['i', 'I', 'input', 'INPUT']:
             key_input = getpass('Key: ')
-            key_b64 = (key_input.strip().rstrip('=') + KEY_PADDING)[0:43] + '='
-            if DEBUG == True: 
-                print('Key input: ' + key_input)
-                print('Base64: ' + key_b64 + '\n')
+            if DEBUG == True:
+                print('Input: ' + key_input)
         
             try:
-                key = b64decode(key_b64.encode('utf-8'))
+                key = b64decode(((key_input.strip().rstrip('='))[0:43] + '=').encode('utf-8'))
                 if DEBUG == True:
                     print('Key: {0}'.format(key))
                     print('Hex: ' + key.hex())
                     print('Base64: ' + b64encode(key).decode('utf-8'))
                     print('Ciphertext: ' + b64encode(DataCryptor.encrypt(key, key)).decode('utf-8'))
-                    print('Mnemonic: ' + mnemo.to_mnemonic(key) + '\n')
+                    print('Mnemonic: ' + mnemo.to_mnemonic(key))
             except Exception as e:
                 print('[warning] Key format error' + '\n')
                 continue
 
             try:
                 key_plaintext = DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8')))
-                if DEBUG == True: print('Key plaintext: {0}'.format(key_plaintext))
+                if DEBUG == True:
+                    print('Plaintext: {0}'.format(key_plaintext) + '\n')
             except Exception as e:
                 print('[warning] Incorrect key' + '\n')
                 continue
 
-            if key == key_plaintext:
-                if DEBUG == True: input('[message] Press any key to continue >> ')
-                break
-            else:
-                print('[warning] Unknown error' + '\n')
-                continue
+            if key == key_plaintext: break
             
         elif option in ['n', 'N', 'new', 'NEW']: 
             key_len = input('Length (default 32 bytes): ') or '32'
