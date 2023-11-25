@@ -25,7 +25,6 @@ from mnemonic import Mnemonic
 # ylw3Sur3burHSxk4W5GXAXw4VqWQH5Yo2JIznuD6Q50
 KEY_CIPHERTEXT = 'U5nVyG+EUZdUJPYCHIuBy7c9I0Toq0gNSqA9zVY0Z/tY3N1PturJ1do5EzyzENMPaZ/Q0tFORsL5RWem/b/oVYH6KkGrWW4mKriMlwltGek='
 
-
 class DataCryptor():
     @staticmethod
     def encrypt(key:bytes, data:bytes) -> bytes:
@@ -87,7 +86,6 @@ if __name__ == "__main__":
 
     def option_key(key:bytes):
         option = input('[Key] r.Random c.Current m.Mnemonic h.Hex b.Base64 >> ')
-
         if option in ['Random', 'r', 'R']:
             try:
                 print_key(secrets.token_bytes(int(input('Length (default 32 bytes): ') or '32')))
@@ -116,26 +114,20 @@ if __name__ == "__main__":
         else:
             print('Message: Invalid option' + '\n')
 
-
     clear_screen()
-
     key = None
     mnemo = Mnemonic('english')
     while True:
         option = input('[Menu] l.Login k.Key q.Quit >> ')
-
         clear_screen()
-
         if option in ['Login', 'l', 'L']:
             option = input('[Login] k.Key m.Mnemonic >> ')
-
             if option in ['Key', 'k', 'K']:
                 key_input = getpass('Enter key: ').strip().rstrip('=')
                 if len(key_input) >= 43:
                     key_b64 = key_input[0:43] + '='
                 else:
                     key_b64 = key_input + ('0' * (43 - len(key_input))) + '='
-
                 try:
                     key = b64decode((key_b64).encode('utf-8'))
                 except Exception as e:
@@ -150,7 +142,6 @@ if __name__ == "__main__":
             else:
                 print('Message: Invalid option' + '\n')
                 continue
-
             try:
                 if key == DataCryptor.decrypt(key, b64decode(KEY_CIPHERTEXT.encode('utf-8'))):
                     break
@@ -167,16 +158,12 @@ if __name__ == "__main__":
             print('Message: Invalid option' + '\n')
 
     clear_screen()
-
     while True:
         option = input('[Menu] e.Encrypt d.Decrypt k.Key q.Quit >> ')
-
         clear_screen()
-
         if option in ['Encrypt', 'e', 'E']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
-
             try:
                 FileCryptor.encrypt(key, file_name)
                 print('Message: Done' + '\n')
@@ -185,7 +172,6 @@ if __name__ == "__main__":
         elif option in ['Decrypt', 'd', 'D']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
-
             try:
                 FileCryptor.decrypt(key, file_name)
                 print('Message: Done' + '\n')
