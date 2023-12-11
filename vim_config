@@ -1,19 +1,18 @@
-" VIM 配置文件
-" 用法：cp vim_config ～/.vimrc
+" VIM setting file
 
-" UFT8编码
+" UFT8 encoding
 set encoding=utf8
 
-" 显示行号
+" Show line number
 set nu
 
-" 禁用剪贴板
+" Disable clipboard
 set clipboard=
 
-" 括号匹配
+" Match brackets
 set showmatch
 
-" 语法高亮
+" Syntax highlighting
 syntax enable
 
 " 1 Tab == 4 spaces
@@ -22,7 +21,7 @@ set smarttab
 set tabstop=4
 set shiftwidth=4
 
-" 禁用各类临时文件
+" Disable temporary files
 set nobackup
 set nowb
 set noswapfile
