@@ -58,7 +58,7 @@ class FileCryptor():
     def decrypt(key:bytes, file_path):
         with open(file_path, 'r') as f:
             data = f.read()
-        ciphertext = b64decode((data.strip().rstrip('=') + ('=' * ((4 - (len(data.strip()) % 4)) % 4))).encode('utf-8'))
+        ciphertext = b64decode((data.strip().rstrip('=') + ('=' * ((4 - (len(data.strip().rstrip('=')) % 4)) % 4))).encode('utf-8'))
         plaintext = DataCryptor.decrypt(key, ciphertext)
         with open(file_path, 'wb') as f:
             f.write(plaintext)
@@ -166,17 +166,17 @@ if __name__ == "__main__":
             file_name = input('File: ')
             try:
                 FileCryptor.encrypt(key, file_name)
-                print('Message: Done' + '\n')
+                print('Message: Encryption successful' + '\n')
             except Exception as e:
-                print('Warning: Failed' + '\n')
+                print('Warning: Encryption failed' + '\n')
         elif option in ['Decrypt', 'd', 'D']:
             print('List: ' + '  '.join(listdir('./')))
             file_name = input('File: ')
             try:
                 FileCryptor.decrypt(key, file_name)
-                print('Message: Done' + '\n')
+                print('Message: Decryption successful' + '\n')
             except Exception as e:
-                print('Warning: Failed' + '\n')
+                print('Warning: Decryption failed' + '\n')
         elif option in ['Key', 'k', 'K']:
             option_key(key)        
         elif option in ['Quit', 'q', 'Q']:
