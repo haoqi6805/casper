@@ -52,13 +52,13 @@ class FileCryptor():
             data = f.read()
         ciphertext = DataCryptor.encrypt(key, data)
         with open(file_path, 'w') as f:
-            f.write(b64encode(ciphertext).decode('utf-8'))
+            f.write(b64encode(ciphertext).decode('utf-8').rstrip('='))
     
     @staticmethod
     def decrypt(key:bytes, file_path):
         with open(file_path, 'r') as f:
             data = f.read()
-        ciphertext = b64decode((data.strip()).encode('utf-8'))
+        ciphertext = b64decode((data.strip().rstrip('=') + ('=' * ((4 - (len(data.strip()) % 4)) % 4))).encode('utf-8'))
         plaintext = DataCryptor.decrypt(key, ciphertext)
         with open(file_path, 'wb') as f:
             f.write(plaintext)
