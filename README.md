@@ -5,7 +5,7 @@ Raspberry Pi 4 Model B
 ### System
 Ubuntu 22.04.3 for Rasberry Pi
 
-### Install software
+### Install softwares
 ```bash
 sudo apt update
 sudo apt install -y build-essential gcc make perl dkms
