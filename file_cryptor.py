@@ -57,8 +57,8 @@ class FileCryptor():
     @staticmethod
     def decrypt(key:bytes, file_path):
         with open(file_path, 'r') as f:
-            data = f.read()
-        ciphertext = b64decode((data.strip().rstrip('=') + ('=' * ((4 - (len(data.strip().rstrip('=')) % 4)) % 4))).encode('utf-8'))
+            data = f.read().strip().rstrip('=')
+        ciphertext = b64decode((data + ('=' * ((4 - (len(data) % 4)) % 4))).encode('utf-8'))
         plaintext = DataCryptor.decrypt(key, ciphertext)
         with open(file_path, 'wb') as f:
             f.write(plaintext)
